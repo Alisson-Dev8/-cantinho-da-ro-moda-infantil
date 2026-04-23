@@ -129,7 +129,7 @@ export default function Home() {
         <div className="container mx-auto px-4 grid sm:grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { icon: Heart, color: "bg-primary/20", text: "Feito com amor", desc: "Cada peça com carinho" },
-            { icon: Truck, color: "bg-accent/40", text: "Entrega rapidinha", desc: "Para o Brasil todo" },
+            { icon: Truck, color: "bg-accent/40", text: "Entrega rapidinha", desc: "Para o Mato Grosso do Sul" },
             { icon: ShieldCheck, color: "bg-secondary/60", text: "Tecidos seguros", desc: "Macios e hipoalergênicos" },
             { icon: Gift, color: "bg-tertiary/60", text: "Embalagem fofa", desc: "Pronta para presente" },
           ].map((item, i) => (
