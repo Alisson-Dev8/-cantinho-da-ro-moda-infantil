@@ -159,11 +159,13 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {[
               { img: "/assets/collection-baby.jpg", title: "Bebês", subtitle: "0 - 24 meses", color: "bg-peach", rotate: "-rotate-2" },
               { img: "/assets/collection-girls.jpg", title: "Meninas", subtitle: "2 - 10 anos", color: "bg-primary/30", rotate: "rotate-1" },
               { img: "/assets/collection-boys.jpg", title: "Meninos", subtitle: "2 - 10 anos", color: "bg-accent", rotate: "-rotate-1" },
+              { img: "/assets/collection-girls.jpg", title: "Meninas", subtitle: "12 - 18 anos", color: "bg-secondary/60", rotate: "rotate-2" },
+              { img: "/assets/collection-boys.jpg", title: "Meninos", subtitle: "12 - 18 anos", color: "bg-tertiary/60", rotate: "-rotate-2" },
             ].map((c, i) => (
               <div key={i} className={`group ${c.rotate} hover:rotate-0 transition-transform duration-500`}>
                 <div className={`${c.color} rounded-[2.5rem] p-6 shadow-soft hover:shadow-playful transition-shadow`}>
