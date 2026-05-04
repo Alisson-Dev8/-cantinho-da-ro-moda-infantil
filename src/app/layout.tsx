@@ -4,6 +4,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Cantinho da Ro - Moda Infantil",
   description: "Roupinhas fofas, divertidas e cheias de cor para os pequenos brincarem, sonharem e crescerem felizes.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

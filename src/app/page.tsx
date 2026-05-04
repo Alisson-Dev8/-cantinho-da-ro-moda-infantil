@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Heart, Sparkles, Star, Sun, Cloud, Smile, Gift, Truck, ShieldCheck, MessageCircle } from "lucide-react";
+
+const LOGO_SRC = "/assets/logo-cantinho-da-ro.png";
 
 export default function Home() {
   return (
@@ -11,11 +14,12 @@ export default function Home() {
           <a href="#" className="flex items-center gap-2">
             <div className="h-16 w-16 rounded-full bg-background shadow-soft overflow-hidden flex items-center justify-center animate-bounce-soft">
               <Image
-                src="/assets/logo-cantinho-da-ro.png"
+                src={LOGO_SRC}
                 alt="Cantinho da Ro - Moda Infantil"
                 width={160}
                 height={160}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
+                priority
               />
             </div>
           </a>
@@ -23,7 +27,7 @@ export default function Home() {
             <a href="#colecoes" className="hover:text-primary transition-colors">Coleções</a>
             <a href="#sobre" className="hover:text-primary transition-colors">Sobre</a>
             <a href="#beneficios" className="hover:text-primary transition-colors">Vantagens</a>
-            <a href="#contato" className="hover:text-primary transition-colors">Contato</a>
+            <a href="#depoimentos" className="hover:text-primary transition-colors">Depoimentos</a>
           </div>
           <Button 
           asChild 
@@ -219,31 +223,148 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA / NEWSLETTER */}
-      <section id="contato" className="py-24">
+      {/* DEPOIMENTOS */}
+      <section id="depoimentos" className="py-24">
         <div className="container mx-auto px-4">
           <div className="bg-card rounded-[3rem] p-12 md:p-16 shadow-playful relative overflow-hidden">
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary rounded-full opacity-50" />
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-accent rounded-full opacity-50" />
 
-            <div className="relative grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  Receba <span className="text-primary">novidades</span> e mimos! 🎁
+            <div className="relative">
+              <div className="text-center mb-10 space-y-3">
+                <div className="inline-flex items-center gap-2 bg-secondary/60 px-4 py-2 rounded-full font-display font-semibold text-sm">
+                  <Star className="w-4 h-4 text-secondary fill-secondary" />
+                  Depoimentos
+                </div>
+                <h2 className="font-display text-3xl md:text-4xl font-bold">
+                  Quem compra, <span className="text-primary">se apaixona</span>
                 </h2>
-                <p className="text-muted-foreground">
-                  Cadastre seu e-mail e ganhe <strong>10% de desconto</strong> na primeira compra. Promo, lançamentos e
-                  inspirações direto pra você.
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Um pedacinho do carinho que a gente recebe das famílias que vestem os pequenos com o Cantinho da Ro.
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="email"
-                  placeholder="seu@email.com"
-                  className="flex-1 rounded-full px-6 py-4 bg-background border-2 border-border focus:border-primary focus:outline-none font-medium"
-                />
-                <Button size="lg" className="rounded-full bg-primary hover:bg-primary/90 font-display shadow-bubble hover:translate-y-1 hover:shadow-none transition-all">
-                  <Sparkles className="w-5 h-5" /> Quero!
+
+              {(() => {
+                const testimonials = [
+                  {
+                    name: "Amanda S.",
+                    meta: "Campo Grande - MS",
+                    text:
+                      "Chegou rapidinho e as peças são lindas! Tecido macio, acabamento perfeito e as cores são ainda mais bonitas ao vivo.",
+                  },
+                  {
+                    name: "Bruna R.",
+                    meta: "Dourados - MS",
+                    text:
+                      "Atendimento maravilhoso no WhatsApp e a embalagem é uma fofura. Minha filha amou e ficou super confortável.",
+                  },
+                  {
+                    name: "Carla M.",
+                    meta: "Três Lagoas - MS",
+                    text:
+                      "Qualidade excelente! Já lavei algumas vezes e continua perfeito. Vou comprar de novo com certeza.",
+                  },
+                  {
+                    name: "Débora P.",
+                    meta: "Corumbá - MS",
+                    text:
+                      "Modelagem ótima e confortável. Meu filho corre o dia inteiro e as peças não incomodam nada.",
+                  },
+                  {
+                    name: "Elaine T.",
+                    meta: "Campo Grande - MS",
+                    text:
+                      "Amei a variedade e as estampas! Dá pra montar looks lindos e ainda assim práticos pro dia a dia.",
+                  },
+                  {
+                    name: "Fernanda L.",
+                    meta: "Naviraí - MS",
+                    text:
+                      "Chegou bem embaladinho e com cheirinho gostoso. Dá pra ver o capricho em cada detalhe!",
+                  },
+                  {
+                    name: "Gabi N.",
+                    meta: "Sidrolândia - MS",
+                    text:
+                      "O tecido é muito macio e não desbota. Minha bebê ficou uma fofura com o conjuntinho.",
+                  },
+                  {
+                    name: "Helena V.",
+                    meta: "Aquidauana - MS",
+                    text:
+                      "Compra fácil, atendimento rápido e entrega certinha. Virou minha loja favorita pra moda infantil.",
+                  },
+                  {
+                    name: "Isabela C.",
+                    meta: "Nova Andradina - MS",
+                    text:
+                      "Qualidade e preço justo. Já indiquei pras amigas e todo mundo elogiou as peças!",
+                  },
+                ];
+
+                const Card = ({ name, meta, text }: { name: string; meta: string; text: string }) => (
+                  <div className="bg-background/60 backdrop-blur-sm rounded-3xl p-7 shadow-soft hover:shadow-playful transition-shadow h-full">
+                    <div className="flex items-center gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-secondary fill-secondary" />
+                      ))}
+                    </div>
+                    <p className="text-sm md:text-base leading-relaxed text-foreground/90">“{text}”</p>
+                    <div className="mt-6 flex items-center justify-between">
+                      <div>
+                        <p className="font-display font-bold">{name}</p>
+                        <p className="text-xs text-muted-foreground">{meta}</p>
+                      </div>
+                      <div className="h-10 w-10 rounded-2xl bg-accent/60 flex items-center justify-center">
+                        <Heart className="w-5 h-5 text-accent-foreground" fill="currentColor" />
+                      </div>
+                    </div>
+                  </div>
+                );
+
+                return (
+                  <>
+                    {/* Mobile: carousel */}
+                    <div className="md:hidden">
+                      <Carousel opts={{ align: "start", loop: true }}>
+                        <CarouselContent className="-ml-4">
+                          {testimonials.map((t) => (
+                            <CarouselItem key={t.name} className="pl-4 basis-[88%]">
+                              <Card name={t.name} meta={t.meta} text={t.text} />
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="left-3 top-1/2 -translate-y-1/2" />
+                        <CarouselNext className="right-3 top-1/2 -translate-y-1/2" />
+                      </Carousel>
+                      <p className="text-center text-xs text-muted-foreground mt-4">Deslize para ver mais</p>
+                    </div>
+
+                    {/* Desktop: grid */}
+                    <div className="hidden md:grid md:grid-cols-3 gap-6">
+                      {testimonials.slice(0, 6).map((t) => (
+                        <Card key={t.name} name={t.name} meta={t.meta} text={t.text} />
+                      ))}
+                    </div>
+                  </>
+                );
+              })()}
+
+              <div className="mt-10 flex justify-center">
+                <Button
+                  asChild
+                  size="lg"
+                  className="rounded-full bg-primary hover:bg-primary/90 font-display shadow-bubble hover:translate-y-1 hover:shadow-none transition-all"
+                >
+                  <a
+                    href="https://wa.me/556792360111?text=Olá! Vim pelo site e gostaria de conhecer as roupas do Cantinho da Ro."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Quero comprar também</span>
+                  </a>
                 </Button>
               </div>
             </div>
@@ -257,7 +378,7 @@ export default function Home() {
     <div>
       <div className="bg-background rounded-2xl p-3 inline-block mb-4">
         <Image
-          src="/assets/logo-cantinho-da-ro.png"
+          src={LOGO_SRC}
           alt="Cantinho da Ro"
           width={160}
           height={160}
@@ -272,7 +393,7 @@ export default function Home() {
       <ul className="space-y-2 text-sm opacity-70">
         <li><a href="#colecoes" className="hover:opacity-100">Coleções</a></li>
         <li><a href="#sobre" className="hover:opacity-100">Sobre nós</a></li>
-        <li><a href="#contato" className="hover:opacity-100">Contato</a></li>
+        <li><a href="#depoimentos" className="hover:opacity-100">Depoimentos</a></li>
       </ul>
     </div>
 
